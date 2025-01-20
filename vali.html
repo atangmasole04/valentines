@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #ffafbd, #ffc3a0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .heart {
+            font-size: 120px;
+            color: red;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .headline {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            font-size: 1.5em;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            text-decoration: none;
+            font-size: 1.2em;
+            color: white;
+            background: #ff5f6d;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+        }
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: transparent;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .form-container {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .form-container.show {
+            display: block;
+        }
+
+        .flower {
+            margin-top: 20px;
+            font-size: 50px;
+            color: #ff5f6d;
+            animation: bloom 2s infinite alternate;
+        }
+
+        @keyframes bloom {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.2); opacity: 1; }
+        }
+
+        form button {
+            background: #ff5f6d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+            padding: 10px 20px;
+        }
+
+        form button:hover {
+            background: #ff3b4d;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars">
+        <!-- Stars will be dynamically added -->
+    </div>
+
+    <div class="container">
+        <div class="heart">❤️</div>
+        <div class="headline"> Will you be my Valentine?</div>
+        <div class="message">
+            You make my world brighter, my days happier, and my heart fuller. There's no one else I'd rather spend Valentine's Day with.
+        </div>
+        <a href="#" class="btn" onclick="showForm('yes')">Yes</a>
+        <a href="#" class="btn" onclick="showForm('no')">No</a>
+
+        <div id="form-yes" class="form-container">
+            <h2>Yay! I knew you’d say yes ❤️</h2>
+            <div class="flower">🌹</div>
+            <p>I got you a flower!</p>
+            <form action="https://formspree.io/f/meoobgrw" method="POST">
+                <input type="hidden" name="response" value="Yes">
+                <button type="submit">Send Response</button>
+            </form>
+        </div>
+
+        <div id="form-no" class="form-container">
+            <h2>Oh no! 💔 But I respect your decision.</h2>
+            <p>Thank you for being honest. Wishing you a wonderful Valentine's Day!</p>
+            <form action="https://formspree.io/f/meoobgrw" method="POST">
+                <input type="hidden" name="response" value="No">
+                <button type="submit">Send Response</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Add stars to create a magical background
+        const starContainer = document.querySelector('.stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.animationDelay = `${Math.random() * 3}s`;
+            starContainer.appendChild(star);
+        }
+
+        // Show the appropriate form
+        function showForm(answer) {
+            document.getElementById('form-yes').classList.remove('show');
+            document.getElementById('form-no').classList.remove('show');
+
+            if (answer === 'yes') {
+                document.getElementById('form-yes').classList.add('show');
+            } else {
+                document.getElementById('form-no').classList.add('show');
+            }
+        }
+    </script>
+</body>
+</html>
